@@ -1,3 +1,8 @@
 <div class="row justify-content-center">
-
+<H1>Список парикмахеров</H1>
+  <%@barbers.each do |barber| %>
+    <p>
+      <%=barber.name %>
+    </p>
+  <% end %>
 </div>
