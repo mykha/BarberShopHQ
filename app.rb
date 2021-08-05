@@ -22,3 +22,8 @@ get '/about' do
   erb :message
   #erb "<div class=\"jumbotron text-center\"> About us information </div><h1></h1>"
 end
+
+get '/signup' do
+  @barbers = Barber.order 'created_at DESC'
+  erb :visit
+end
