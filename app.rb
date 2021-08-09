@@ -27,3 +27,16 @@ get '/signup' do
   @barbers = Barber.order 'created_at DESC'
   erb :visit
 end
+
+post '/signup' do
+  new_visit = Client.new
+  new_visit.name = params[:person_name]
+  new_visit.phone = params[:person_phone]
+  new_visit.datestamp = params[:visit_date]
+  new_visit.barber = Barber.find(params[:selected_barber])
+  new_visit.color = params[:selected_color]
+  new_visit.save
+  @success_message = "Your visit successfuly saved"
+  @barbers = Barber.order 'created_at DESC'
+  erb :visit
+end
