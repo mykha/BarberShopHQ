@@ -3,8 +3,8 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/activerecord'
 
-#set :database, 'sqlite3:barbershop.db'
-set :database, { :adapter =>'sqlite3', :database=>'barbershop.db' }
+# set :database, 'sqlite3:barbershop.db'
+set :database, { adapter: 'sqlite3', database: 'barbershop.db' }
 
 class Client < ActiveRecord::Base
   validates :name, presence: true, length: { minimum: 3 }
@@ -24,7 +24,7 @@ end
 get '/about' do
   @message = 'There should be information about us'
   erb :message
-  #erb "<div class=\"jumbotron text-center\"> About us information </div><h1></h1>"
+  # erb "<div class=\"jumbotron text-center\"> About us information </div><h1></h1>"
 end
 
 get '/signup' do
@@ -35,7 +35,9 @@ end
 
 get '/barber/:barber_id' do
   @bar = Barber.find params[:barber_id]
-  erb '<h1> <%=@bar.name%> </h1>'
+  @visits = Client.where barber: @bar
+  # erb '<h1> <%=@bar.name%> </h1>'
+  erb :barber
 end
 
 
