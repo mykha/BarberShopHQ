@@ -1,12 +1,12 @@
 <form action="/signup" method="POST">
   <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Type your name" aria-label="Your Name" name="person_name">
+    <input class="form-control" type="text" placeholder="Type your name" aria-label="Your Name" name="client[name]">
   </div>
   <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Type your phone" aria-label="Your Phone Number" name="person_phone">
+    <input class="form-control" type="text" placeholder="Type your phone" aria-label="Your Phone Number" name="client[phone]">
   </div>
   <div class="mb-3">
-    <select class="form-select" aria-label="Выберете парикмахера" name="selected_barber">
+    <select class="form-select" aria-label="Выберете парикмахера" name="client[barber]">
       <option selected>Select barber</option>
       <%@barbers.each do |barber| %>
         <option value=<%=barber.id%> ><%=barber.name %></option>
@@ -17,12 +17,12 @@
 
   <div class="mb-3">
     <label for="exampleColorInput" class="form-label">Выберете цвет покраски</label>
-    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color" name="selected_color">
+    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color" name="client[color]">
   </div>
 
   <div class="mb-3">
     <label for="inputDate" >Введите дату:</label>
-    <input type="date" class="form-control" name="visit_date">
+    <input type="date" class="form-control" name="client[datestamp]">
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

@@ -7,6 +7,10 @@ require 'sinatra/activerecord'
 set :database, {:adapter =>'sqlite3', :database=>'barbershop.db'}
 
 class Client < ActiveRecord::Base
+  validates :name, presence: true
+  validates :phone, presence: true
+  validates :datestamp, presence: true
+  validates :color, presence: true
 end
 
 class Barber < ActiveRecord::Base
@@ -29,14 +33,16 @@ get '/signup' do
 end
 
 post '/signup' do
-  new_visit = Client.new
-  new_visit.name = params[:person_name]
-  new_visit.phone = params[:person_phone]
-  new_visit.datestamp = params[:visit_date]
-  new_visit.barber = Barber.find(params[:selected_barber])
-  new_visit.color = params[:selected_color]
+  pp = params[:client]
+  new_visit = Client.new pp
   new_visit.save
-  @success_message = "Your visit successfuly saved"
+  if new_visit.valid?
+    @success_message = "Your visit successfuly saved"
+  else
+    new_visit.errors.messages.each do |message|
+      erb @error = "#{message[0]} #{message[1]}"
+    end
+  end
   @barbers = Barber.order 'created_at DESC'
   erb :visit
 end
