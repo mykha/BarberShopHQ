@@ -1,29 +1,35 @@
 <form action="/signup" method="POST">
-  <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Type your name" aria-label="Your Name" name="client[name]" value="<%=@new_visit.name%>">
+  <div class="form-floating mb-3">
+    <input class="form-control" type="text" placeholder="Name" aria-label="Your Name" name="client[name]" value="<%=@new_visit.name%>">
+    <label for="floatingInput">Your Name</label>
   </div>
-  <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Type your phone" aria-label="Your Phone Number" name="client[phone]">
+  <div class="form-floating mb-3">
+    <input class="form-control" type="text" placeholder="+ 380 50 555 55 55" aria-label="Your Phone Number" name="client[phone]">
+    <label for="floatingInput">Phone</label>
   </div>
-  <div class="mb-3">
+  <div class="form-floating mb-3">
     <select class="form-select" aria-label="Выберете парикмахера" name="client[barber]">
-      <option selected>Select barber</option>
       <%@barbers.each do |barber| %>
         <option value=<%=barber.id%> ><%=barber.name %></option>
       <% end %>
     </select>
-
+    <label for="floatingSelect">Select barber</label>
   </div>
 
-  <div class="mb-3">
-    <label for="exampleColorInput" class="form-label">Выберете цвет покраски</label>
-    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color" name="client[color]">
+    <div class="col">
+      <div class="row">
+      <div class="mb-3">
+        <label for="exampleColorInput" class="form-label">Выберете цвет покраски</label>
+        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color" name="client[color]">
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="date" class="form-control" name="client[datestamp]">
+        <label for="floatingDate" >Введите дату:</label>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <label for="inputDate" >Введите дату:</label>
-    <input type="date" class="form-control" name="client[datestamp]">
-  </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

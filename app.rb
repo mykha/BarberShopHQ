@@ -33,12 +33,18 @@ get '/signup' do
   erb :visit
 end
 
+get '/barber/:barber_id' do
+  @bar = Barber.find params[:barber_id]
+  erb '<h1> <%=@bar.name%> </h1>'
+end
+
+
 post '/signup' do
   pp = params[:client]
   @new_visit = Client.new pp
   @new_visit.save
   if @new_visit.valid?
-    @success_message = "Your visit successfuly saved"
+    @success_message = 'Your visit successfuly saved'
   else
     @error = @new_visit.errors.full_messages.first
   end
